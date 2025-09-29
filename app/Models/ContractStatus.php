@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ContractType extends Model
+class ContractStatus extends Model
 {
-    public function contract(){
+    public function contract()
+    {
         return $this->hasMany(Contract::class);
     }
 }

@@ -4,6 +4,13 @@ namespace App\Helper;
 
 class ApiResponse
 {
-    public function reponseFn() {
+    static public function reponseFn($code = 200, $message = null, $data = null)
+    {
+        $respons = [
+            'status' => $code,
+            'message' => $message,
+            'data' => $data
+        ];
+        return response()->json($respons, $code);
     }
 }
