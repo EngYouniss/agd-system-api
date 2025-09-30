@@ -28,30 +28,56 @@ class ContractStatusController extends Controller
      */
     public function store(StoreContractStatusRequest $request)
     {
-        //
+        $data = $request->validated();
+        $created = ContractStatus::create($data);
+        if ($created) {
+            return ApiResponse::reponseFn(201, "status created successfully", $data);
+        }
+        return ApiResponse::reponseFn(200, "status not created ", []);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ContractStatus $contractStatus)
+    public function show($id)
     {
-        //
+        $data = ContractStatus::find($id);
+        if (!$data)
+            return ApiResponse::reponseFn(200, "status not found.", []);
+        else
+            return ApiResponse::reponseFn(200, "status found successfully.", new ContractStatusResource($data));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContractStatusRequest $request, ContractStatus $contractStatus)
+    public function update(UpdateContractStatusRequest $request, $id)
     {
-        //
+        $data = ContractStatus::find($id);
+        if (!$data) {
+            return ApiResponse::reponseFn(200, "status not found.", []);
+        }
+        $validated = $request->validated();
+        $updated = $data->update($validated);
+        if ($updated) {
+            return ApiResponse::reponseFn(200, "status updated successfully.", new ContractStatusResource($data));
+        }
+        return ApiResponse::reponseFn(200, "status not updated.", []);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ContractStatus $contractStatus)
+    public function destroy($id)
     {
-        //
+        $data = ContractStatus::find($id);
+        if (!$data) {
+            return ApiResponse::reponseFn(200, "status not found.", []);
+        }
+        $deleted = $data->delete();
+        if ($deleted) {
+            return ApiResponse::reponseFn(200, "status deleted successfully.", []);
+        }
+        return ApiResponse::reponseFn(200, "status not deleted .", new ContractStatusResource($data));
     }
 }

@@ -19,7 +19,7 @@ class ContractController extends Controller
         $contracts = Contract::with(['contractType', 'status'])->get();
 
         if (count($contracts) > 0) {
-            return ApiResponse::reponseFn(200, "conract retrived successfully.", ContractResource::collection($contracts));
+            return ApiResponse::reponseFn(200, "conract retrieved successfully.", ContractResource::collection($contracts));
         }
         return ApiResponse::reponseFn(200, " no conract found.", $contracts);
     }
