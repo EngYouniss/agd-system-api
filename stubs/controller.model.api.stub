@@ -3,10 +3,14 @@
 namespace {{ namespace }};
 
 use {{ rootNamespace }}Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Resources\{{ modelName }}Resource;
-use {{ storeRequest }};
-use {{ updateRequest }};
+use App\Http\Requests\{{ storeRequest }};
+
+
+
+use App\Http\Requests\ {{ updateRequest }};
 use {{ rootNamespace }}Helper\ApiResponse;
 
 class {{ class }} extends Controller

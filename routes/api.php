@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Api\AttachmentController;
 use App\Http\Controllers\Api\AttachmentTypeController;
 use App\Http\Controllers\Api\ContractController;
 use App\Http\Controllers\Api\ContractStatusController;
@@ -28,4 +29,5 @@ Route::apiResource('contracts/statuses',ContractStatusController::class);
 
 ##---------------------- Attachments Types Module -------------------##
 
-Route::apiResource('contracts/attachments',AttachmentTypeController::class);
+Route::apiResource('contracts/attachments-types',AttachmentTypeController::class);
+Route::apiResource('contracts/attachments',AttachmentController::class);
