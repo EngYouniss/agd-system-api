@@ -4,15 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAttachmentRequest extends FormRequest
+class StoreAttachmentRequest extends BaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,7 +16,10 @@ class StoreAttachmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>'required',
+            'contract_id'=>'required',
+            'attachment_type_id'=>'required',
+
         ];
     }
 }
