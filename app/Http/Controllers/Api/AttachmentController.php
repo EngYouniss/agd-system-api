@@ -19,10 +19,10 @@ class AttachmentController extends Controller
         $data = Attachment::query()->latest()->get();
 
         if ($data->count() > 0) {
-            return ApiResponse::reponseFn(200, "List of Attachments retrieved successfully.",AttachmentResource::collection($data));
+            return ApiResponse::reponseFn(200, "List of Governorates retrieved successfully.",AttachmentResource::collection($data));
         }
 
-        return ApiResponse::reponseFn(200, "No Attachment records found.", []);
+        return ApiResponse::reponseFn(200, "No Governorate records found.", []);
     }
 
     /**
@@ -34,7 +34,7 @@ class AttachmentController extends Controller
         $created = Attachment::create($validated);
 
         if ($created) {
-            return ApiResponse::reponseFn(201, "New Attachment created successfully.", new AttachmentResource($created));
+            return ApiResponse::reponseFn(201, "New Governorate created successfully.", new AttachmentResource($created));
         }
 
         return ApiResponse::reponseFn(400, "Failed to create Attachment.", []);
@@ -46,7 +46,7 @@ class AttachmentController extends Controller
     public function show(Attachment $attachment)
     {
         if (!$attachment) {
-            return ApiResponse::reponseFn(404, "Attachment not found.", []);
+            return ApiResponse::reponseFn(404, "Governorate not found.", []);
         }
 
         return ApiResponse::reponseFn(200, "Attachment details retrieved successfully.", new AttachmentResource($attachment));
@@ -58,16 +58,16 @@ class AttachmentController extends Controller
     public function update(UpdateAttachmentRequest $request, Attachment $attachment)
     {
         if (!$attachment) {
-            return ApiResponse::reponseFn(404, "Attachment not found.", []);
+            return ApiResponse::reponseFn(404, "Governorate not found.", []);
         }
 
         $updated = $attachment->update($request->validated());
 
         if ($updated) {
-            return ApiResponse::reponseFn(200, "Attachment updated successfully.", new AttachmentResource($attachment));
+            return ApiResponse::reponseFn(200, "Governorate updated successfully.", new AttachmentResource($attachment));
         }
 
-        return ApiResponse::reponseFn(400, "Failed to update Attachment.", []);
+        return ApiResponse::reponseFn(400, "Failed to update Governorate.", []);
     }
 
     /**
@@ -76,15 +76,15 @@ class AttachmentController extends Controller
     public function destroy(Attachment $attachment)
     {
         if (!$attachment) {
-            return ApiResponse::reponseFn(404, "Attachment not found.", []);
+            return ApiResponse::reponseFn(404, "Governorate not found.", []);
         }
 
         $deleted = $attachment->delete();
 
         if ($deleted) {
-            return ApiResponse::reponseFn(200, "Attachment deleted successfully.", []);
+            return ApiResponse::reponseFn(200, "Governorate deleted successfully.", []);
         }
 
-        return ApiResponse::reponseFn(400, "Failed to delete Attachment.", new AttachmentResource($attachment));
+        return ApiResponse::reponseFn(400, "Failed to delete Governorate.", new AttachmentResource($attachment));
     }
 }
