@@ -14,6 +14,13 @@ class DistrictResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'courts' => CourtResource::collection($this->whenLoaded('courts')),
+            'governorate' => GovernorateResource::make(
+                $this->whenLoaded('governorate')
+            ),
+        ];
     }
 }

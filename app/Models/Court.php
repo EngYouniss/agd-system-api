@@ -12,6 +12,6 @@ class Court extends Model
     ];
 
     public function districts(){
-        return $this->belongsToMany(District::class,'district_id');
+        return $this->belongsToMany(District::class);
     }
 }

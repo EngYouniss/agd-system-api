@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Governorate extends Model
+class DocumentType extends Model
 {
     protected $fillable=[
         'name',
         'description'
     ];
 
-    public function districts(){
-        return $this->hasMany(District::class);
+    public function documents(){
+        return $this->hasMany(Document::class);
     }
 }

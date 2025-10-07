@@ -13,6 +13,10 @@ class District extends Model
     ];
 
     public function courts(){
-        return $this->belongsToMany(Court::class,'court_id');
+        return $this->belongsToMany(Court::class);
+    }
+
+    public function governorate(){
+        return $this->belongsTo(Governorate::class,'governorate_id');
     }
 }

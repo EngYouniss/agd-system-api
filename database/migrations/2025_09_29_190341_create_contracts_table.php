@@ -13,15 +13,51 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('contract_number');
-            $table->text('husband_conditions')->nullable();
-            $table->text('wife_conditions')->nullable();
-            $table->decimal('mahr_total',12,2)->default(0);
-            $table->decimal('mahr_paid',12,2)->default(0);
-            $table->decimal('mahr_remaining',12,2)->default(0);
-            $table->foreignId('contract_status_id')->constrained('contract_statuses')->onDelete('restrict');
-            $table->foreignId('contract_type_id')->constrained('contract_types')->onDelete('restrict');
+
+            // رقم العقد
+            $table->unsignedBigInteger('contract_number')->unique();
+
+            // النوع والحالة
+            $table->foreignId('contract_status_id')
+                  ->constrained('contract_statuses')
+                  ->onDelete('restrict');
+
+            $table->foreignId('contract_type_id')
+                  ->constrained('contract_types')
+                  ->onDelete('restrict');
+
+            // تتبّع مستخدمي النظام (بدون ربطهم كأطراف)
+            $table->foreignId('created_by')->nullable()
+                  ->constrained('users')->nullOnDelete();
+
+            $table->foreignId('approved_by')->nullable()
+                  ->constrained('users')->nullOnDelete();
+
+            $table->foreignId('rejected_by')->nullable()
+                  ->constrained('users')->nullOnDelete();
+
+            // تواريخ الحالة (استخدم date كما طلبت)
+            $table->date('sent_at')->nullable();
+            $table->date('approved_at')->nullable();
+            $table->date('rejected_at')->nullable();
+
+            // سبب الرفض (اختياري)
+            $table->string('rejected_reason', 255)->nullable();
+
+            // ختم الأمين الشرعي عند الإرسال (اختياري)
+            $table->date('amin_seal_at')->nullable();
+            $table->string('amin_seal_hash', 128)->nullable();
+            $table->string('amin_seal_algo', 32)->nullable();
+
+            // توقيع النظام الإلكتروني النهائي (اختياري)
+            $table->date('signed_at')->nullable();
+            $table->string('signature_hash', 128)->nullable();
+            $table->string('signature_algo', 32)->nullable();
+
+
             $table->timestamps();
+
+
         });
     }
 
