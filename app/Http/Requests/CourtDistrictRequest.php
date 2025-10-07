@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCourtRequest extends BaseRequest
+class CourtDistrictRequest extends BaseRequest
 {
-
 
     /**
      * Get the validation rules that apply to the request.
@@ -16,9 +15,6 @@ class StoreCourtRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'address' => 'required',
-
             'district_ids'   => 'required|array|min:1',
             'district_ids.*' => 'integer|exists:districts,id',
         ];

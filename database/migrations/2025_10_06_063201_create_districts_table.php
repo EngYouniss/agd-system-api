@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('districts', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->unsignedBigInteger('governorate_id');
+            $table->foreign('governorate_id')->references('id')->on('governorates');
             $table->timestamps();
         });
     }
